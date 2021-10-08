@@ -12,9 +12,19 @@ while true
     break
   end
 
+  
   p "What is your preferred unit for temperarture?"
-  p "Enter: 'metric' for celcius or Enter: 'imperial' for farenheit. "
-  unit_name = gets.chomp.downcase
+  puts "[C]elcius or [F]arenheit"
+
+  input = gets.chomp.upcase
+  units = {"Celcius" => "metric", "Farenheit" => "imperial"}
+  unit_name = ""
+  if input == "C"
+    unit_name = units["Celcius"]
+  elsif input == "F"
+    unit_name = units["Farenheit"]
+  end
+
 
   response = HTTP.get("https://api.openweathermap.org/data/2.5/weather?q=#{city_name}&units=#{unit_name}&appid=#{ENV["OPEN_WEATHER_API_KEY"]}")
 
@@ -54,7 +64,6 @@ end
 # unit = ""
 # if input == "C"
 #   unit = units["Celcius"]
-
 # elsif input == "F"
 #   unit = units["Farenheit"]
 # end
