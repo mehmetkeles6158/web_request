@@ -12,7 +12,11 @@ while true
     break
   end
 
-  response = HTTP.get("https://api.openweathermap.org/data/2.5/weather?q=#{city_name}&units=imperial&appid=#{ENV["OPEN_WEATHER_API_KEY"]}")
+  p "What is your preferred unit for temperarture?"
+  p "Enter: 'metric' for celcius or Enter: 'imperial' for farenheit. "
+  unit_name = gets.chomp.downcase
+
+  response = HTTP.get("https://api.openweathermap.org/data/2.5/weather?q=#{city_name}&units=#{unit_name}&appid=#{ENV["OPEN_WEATHER_API_KEY"]}")
 
 
   weather_response = response.parse(:json)
@@ -43,9 +47,7 @@ end
 # end
 
 # puts "Which units will you prefer for temprature?"
-
 # puts "[C]elcius or [F]arenheit"
-
 # input = gets.chomp
 
 # units = {"Celcius" => "metric", "Farenheit" => "imperial"}
